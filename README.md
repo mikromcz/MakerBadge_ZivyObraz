@@ -27,6 +27,7 @@ Práce s API, parsování obrázku a zobrazování na E-Ink je v souboru *code.p
 ## Poznámky
 - Kód je sice nyní kompatibilní s CircuitPython 9x, ale ve verzích 9.0.0, 9.0.4, 9.0.5, 9.1.0b3 se zobrazuje v horní části displeje šmouha co nezmizí. S CP 8.x funguje vše jak má (Zkoušeno s 8.2.6 a 8.2.10)
 - [Živý obraz](https://zivyobraz.eu/) mi občas vrací BMP s 24 bitovou hloubkou, a s tím si skript neporadí (*MemoryError: memory allocation failed, allocating 67108864 bytes*)
+- Displej je asi GDEM0213B74, 4 stupně šedi - lze tedy zkusit color "BW" i "4G"
 
 ## Další ukázky s MakerBadge:
 - [Interaktivní visačka s QR vstupenkou](https://github.com/MakerClassCZ/Events/tree/main/2023-09-15-PyconCZ/badge)
