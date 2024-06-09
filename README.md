@@ -19,7 +19,9 @@ Práce s API, parsování obrázku a zobrazování na E-Ink je v souboru *code.p
 - MakerBadge:
   - https://www.makermarket.cz/maker-badge/
   - https://github.com/makerfaireczech/maker_badge
-- Živý obraz: https://zivyobraz.eu/
+- Živý obraz:
+  - https://zivyobraz.eu/
+  - https://github.com/MultiTricker/zivyobraz-fw
 - CircuitPython: https://circuitpython.org/board/maker_badge/
 
 ## Poznámky
