@@ -9,7 +9,7 @@ import alarm
 import microcontroller
 
 # zivyobraz API settings
-version = "2.0"
+version = "1.0"
 color = "BW"
 
 (display, touch, led_matrix, colors) = setup(touch_enable=False, led_enable=False)
@@ -43,7 +43,7 @@ URL = (
 pool = socketpool.SocketPool(wifi.radio)
 requests = adafruit_requests.Session(pool)
 
-print("zivyobraz URL:", URL)
+print("ZivyObraz URL:", URL)
 resp = requests.get(URL)
 
 
