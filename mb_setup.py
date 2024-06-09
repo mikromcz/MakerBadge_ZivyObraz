@@ -6,18 +6,17 @@ from digitalio import DigitalInOut, Direction
 import analogio
 from adafruit_display_text import bitmap_label
 
-
 colors = {
-        'black':  0x000000,
-        'white':  0xFFFFFF,
-        'red':    0xFF0000,
-        'green':  0x00FF00,
-        'blue':   0x0000FF,
-        'yellow': 0xFFFF00,
+    "black": 0x000000,
+    "white": 0xFFFFFF,
+    "red": 0xFF0000,
+    "green": 0x00FF00,
+    "blue": 0x0000FF,
+    "yellow": 0xFFFF00,
 }
 
-def setup(time_to_refresh = 180, touch_enable = True, led_enable = True):
 
+def setup(time_to_refresh=400, touch_enable=True, led_enable=True):
 
     touch = []
     if touch_enable:
@@ -26,17 +25,16 @@ def setup(time_to_refresh = 180, touch_enable = True, led_enable = True):
 
         # Define touch buttons
         touch_threshold = 20000
-        for pin in [board.D5,board.D4,board.D3,board.D2,board.D1]:
+        for pin in [board.D5, board.D4, board.D3, board.D2, board.D1]:
             tmp = touchio.TouchIn(pin)
             tmp.threshold = touch_threshold
             touch.append(Debouncer(tmp))
 
-
     led_matrix = None
     if led_enable:
         import neopixel
-        led_matrix = neopixel.NeoPixel(board.D18, 4, brightness = 0.1, auto_write = False)
 
+        led_matrix = neopixel.NeoPixel(board.D18, 4, brightness=0.1, auto_write=False)
 
     # Define board pinout
     board_spi = board.SPI()  # Uses SCK and MOSI
@@ -55,18 +53,26 @@ def setup(time_to_refresh = 180, touch_enable = True, led_enable = True):
     # Prepare ePaper display
     displayio.release_displays()
     display_bus = displayio.FourWire(
-        board_spi, command = board_epd_dc, chip_select = board_epd_cs, reset = board_epd_reset, baudrate = 1000000
+        board_spi,
+        command=board_epd_dc,
+        chip_select=board_epd_cs,
+        reset=board_epd_reset,
+        baudrate=1000000,
     )
-
 
     time.sleep(1)
 
     display = adafruit_ssd1680.SSD1680(
-        display_bus, width = display_width, height = display_height, rotation = 270, busy_pin = board_epd_busy, seconds_per_frame = time_to_refresh
+        display_bus,
+        width=display_width,
+        height=display_height,
+        rotation=270,
+        busy_pin=board_epd_busy,
+        seconds_per_frame=time_to_refresh,
     )
-    
 
     return (display, touch, led_matrix, colors)
+
 
 def get_battery():
     vbat_voltage = analogio.AnalogIn(board.D6)
@@ -77,8 +83,10 @@ def get_battery():
     enable_battery_reading.value = True
     return bat_value
 
+
 def qr_gen(data):
     import adafruit_miniqr
+
     qrcode = adafruit_miniqr.QRCode(qr_type=1)
     qrcode.add_data(data)
     qrcode.make()
@@ -92,13 +100,12 @@ def qr_gen(data):
     for xx in range(qrcode.matrix.width):
         for yy in range(qrcode.matrix.height):
             qr_bitmap[xx + 1, yy + 1] = 1 if qrcode.matrix[xx, yy] else 0
-    
+
     return qr_bitmap
 
 
-
-def text_gen(text, x, y, font, scale = 1, color = colors['black']):
-    label = bitmap_label.Label(font, text = text, color = color, scale = scale)
+def text_gen(text, x, y, font, scale=1, color=colors["black"]):
+    label = bitmap_label.Label(font, text=text, color=color, scale=scale)
     label.x = x
     label.y = y
     return label
