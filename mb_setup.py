@@ -22,7 +22,7 @@ def setup(time_to_refresh=400, touch_enable=True, led_enable=True):
     if touch_enable:
         from adafruit_debouncer import Debouncer
         import touchio
-
+        
         # Define touch buttons
         touch_threshold = 20000
         for pin in [board.D5, board.D4, board.D3, board.D2, board.D1]:
@@ -33,7 +33,7 @@ def setup(time_to_refresh=400, touch_enable=True, led_enable=True):
     led_matrix = None
     if led_enable:
         import neopixel
-
+        
         led_matrix = neopixel.NeoPixel(board.D18, 4, brightness=0.1, auto_write=False)
 
     # Define board pinout
